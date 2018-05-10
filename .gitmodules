@@ -1,0 +1,3 @@
+[submodule ".vuepress"]
+	path = .vuepress
+	url = git@github.com:whoan/vuepress-canvas.git
