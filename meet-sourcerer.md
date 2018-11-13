@@ -10,7 +10,7 @@ Enter [Sourcerer][sourcerer]: A platform that shows our geek profile. It is a gr
 
 On the other hand, I am one of those guys whose contributions are mostly in private repos, and [sourcerer app][sourcerer-app] by default only process public repositories. Anyway, they provide a way to process local private repos to gather statistics and send them to their servers without sending the actual code.
 
-Now you know there is a good tool to show you are not a fraud, so go and create your geek profile, and if you want an easy way to use sourcerer app locally, you might guess, Docker is always a good friend. **[I created this small repo][sourcerer-app-docker] with instructions to process your local private repositories**.
+Now you know there is a good tool to show you are not a fraud, so go and create your profile, and if you want an easy way to use sourcerer app locally, you might guess, Docker is always a good friend. **[I created this small repo][sourcerer-app-docker] with instructions to process your local private repositories**.
 
 I hope you enjoy knowing fun facts about yourself and be proud of your geek profile.
 
