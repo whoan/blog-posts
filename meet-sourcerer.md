@@ -1,3 +1,7 @@
+---
+lastModified: '2018-11-13'
+---
+
 # Meet sourcerer
 
 We developers need to find ways to *sell* our work and it is not always easy if we are not front-end devs with colorful portfolios. It's even more difficult if we don't want to show ourselves as an X programming language dev. The programming language we use sometimes is only an *accident* on our careers, or a matter of necessity to fit on the market. Furthermore, coding is only a portion of our tasks, so just calling us devs sometimes can be unfair when we can also design, test, deploy, coordinate a team or whatever other things we do; but you get the idea, let me call us devs for a moment.

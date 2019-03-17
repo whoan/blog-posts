@@ -2,7 +2,7 @@
 lastModified: '2016-07-27'
 ---
 
-## Safe Reseeding With Laravel
+# Safe Reseeding With Laravel
 
 ## TL;DR
 
