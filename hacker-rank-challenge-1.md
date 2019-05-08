@@ -14,7 +14,7 @@ The problem:
 
 Between all the solutions in the comments, the one that caught my attention due to its simplicity, is [this one](https://www.hackerrank.com/challenges/count-triplets-1/forum/comments/484710). This is an adapted version in C++:
 
-```c++
+```cpp
 long countTriplets(const std::vector<long>& source, long ratio) {
   std::unordered_map<long, long> v2, v3;
   long result = 0;
@@ -37,7 +37,7 @@ Although there are some explanations in the comments in Hacker Rank's page, I st
 
 For those who didn't understand the solution at first sight (like me), I decided to create an easier to understand version to get to the final version above:
 
-```c++
+```cpp
 long countTriplets(const std::vector<long>& source, double ratio) {
   typedef std::unordered_map<double, long> ContainerType;
   ContainerType is, js, ks;
@@ -82,7 +82,7 @@ Let's refactor the solution...
 
 This refactor is a small change to take advantage of the behavior of c++'s `operator[]`. If the element doesn't exist in the container, it just creates a new one with a value equals to the default-constructed underlying object. In our example it is `long() == 0`. ie: We don't need to check if the element exists beforehand as in the *worst case* it just creates a new element in the container with a value of 0, so adding 0 doesn't hurt at all:
 
-```c++
+```cpp
 long countTriplets(const std::vector<long>& source, double ratio) {
   typedef std::unordered_map<double, long> ContainerType;
   ContainerType is, js, ks;
@@ -108,7 +108,7 @@ long countTriplets(const std::vector<long>& source, double ratio) {
 Yes, `ks` is useless as we only use it to count the numbers of triplets using as the key the last element in the triplet. As the challenge only asks for the amount of triplets we can just use a regular variable and accumulate the amount of final triplets:
 
 
-```c++
+```cpp
 long countTriplets(const std::vector<long>& source, double ratio) {
   std::unordered_map<double, long> is, js;
   long count = 0; // new variable to accumulate the number of final triplets
@@ -129,7 +129,7 @@ long countTriplets(const std::vector<long>& source, double ratio) {
 
 Floating-point arithmetic is not that accurate and is more expensive than working with integral numbers, so we can write a version without FP numbers registering the amount of `ks` and `js` that will be in the final triplets if we process `value*ratio` sometime in the future (ie: in another iteration):
 
-```c++
+```cpp
 long countTriplets(const std::vector<long>& source, long ratio) {
   std::unordered_map<long, long> js, ks;
   long count = 0;
@@ -150,7 +150,7 @@ long countTriplets(const std::vector<long>& source, long ratio) {
 
 If you still don't understand how it works, consider again the version in the second refactor which I think is the easiest to understand:
 
-```c++
+```cpp
 long countTriplets(const std::vector<long>& source, double ratio) {
   std::unordered_map<double, long> is, js;
   long count = 0;
