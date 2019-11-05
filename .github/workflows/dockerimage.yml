@@ -1,0 +1,19 @@
+name: Blog
+
+on: [push]
+
+jobs:
+
+  build:
+    name: Build docker image and push it to registry
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v1
+
+    - uses: whoan/docker-build-with-cache-action@master
+      with:
+        username: "${{ secrets.DOCKER_USERNAME }}"
+        password: "${{ secrets.DOCKER_PASSWORD }}"
+        image_name: whoan/blog
