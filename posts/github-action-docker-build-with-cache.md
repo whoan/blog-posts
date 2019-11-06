@@ -32,4 +32,4 @@ jobs:
         image_name: whoan/blog
 ```
 
-All you need is permission to push images to an image repository (eg: `whoan/blog` -> https://hub.docker.com) as the action `push`es the built image together with [the different stages you might have in your Dockerfile](https://docs.docker.com/develop/develop-images/multistage-build/) to the cloud so you can `pull` it the next time your workflow triggers.
+All you need is permission to push images to an image repository (if you don't specify one with `registry`, the default is https://hub.docker.com) as the action `push`es the built image together with [the different stages you might have in your Dockerfile](https://docs.docker.com/develop/develop-images/multistage-build/) to the cloud so you can `pull` it the next time your workflow triggers.
