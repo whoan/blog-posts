@@ -6,7 +6,7 @@ lastModified: '2019-11-05'
 
 As I love to [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) code, I created [this small tool called snip](https://github.com/whoan/snip) to insert code directly from the web into your code with ease. Let me show you an example.
 
-Let's say I have this source file:
+Let's say you have this source file:
 
 ```bash
 $ cat examples/main.cpp
@@ -19,7 +19,7 @@ int main() {
 }
 ```
 
-...and the `snip` command available in my system. If I write the following line, it just works:
+And suppose yor already have the `snip` command available in your system. If you write the following line, it just works:
 
 ```bash
 $ snip g++ examples/main.cpp && ./a.out
@@ -81,4 +81,4 @@ Becomes:
 $ g++ /tmp/tmp.qER7nXdnlj.cpp
 ```
 
-That's all. No magic, no wisdom. Just another tool you might find useful in your daily tasks. You can see [this code](https://github.com/whoan/challenges/blob/master/min-coin-change.cpp) as a real use example.
+That's all. No magic, no wisdom. Just another tool you might find useful in your daily tasks. You can see [this code](https://github.com/whoan/challenges/blob/master/min-coin-change/bottom-up.cpp) as a real use example.
