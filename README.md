@@ -4,7 +4,7 @@ home: true
 
 # My blog posts
 
-You can find these blog posts in https://whoan.me
+You can find these blog posts in https://whoan.online
 
 ## License
 
