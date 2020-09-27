@@ -12,7 +12,7 @@ If you don't want to [invalidate](https://docs.aws.amazon.com/AmazonCloudFront/l
 - Or put this line as part of your CD:
 
     ```bash
-    aws cloudfront update-distribution --default-root-object "/index.$version.html"
+    aws cloudfront update-distribution --id $YOUR_DISTRIBUTION_ID --default-root-object "/index.$version.html"
     ```
 
 I assume you don't use index.html or anything similar in your url, do you?
@@ -74,7 +74,7 @@ An alternative is to version the index.html file and you can do it as follows:
 - Tell cloudfront to use the new _Default Root Object_:
 
     ```bash
-    aws cloudfront update-distribution --default-root-object "/index.$version.html"
+    aws cloudfront update-distribution --id $YOUR_DISTRIBUTION_ID --default-root-object "/index.$version.html"
     ```
 
 EOF
