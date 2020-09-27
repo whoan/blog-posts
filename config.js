@@ -10,6 +10,7 @@ module.exports = {
 
     // if your docs are in a different repo from your main project:
     docsRepo: 'whoan/blog-posts',
+    docsDir: 'posts/',
     // defaults to true, set to false to disable
     editLinks: true,
     // custom text for edit link. Defaults to "Edit this page"
