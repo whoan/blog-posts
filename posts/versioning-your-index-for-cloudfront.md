@@ -6,18 +6,18 @@ lastModified: '2020-09-26'
 
 ## TL;DR
 
-If you don't want to invalidate your index file in Cloudfront, you can make the _Default Root Object_ to point to a new index.<version>.html everytime the index itself or any of the assets linked to it (assets) is changed.
+If you don't want to [invalidate](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) your index file in Cloudfront, you can make the _Default Root Object_ to point to a new index.$version.html everytime the index itself or any of the assets linked to it (assets) is changed.
 
 - You can do it manually (boring!)
 - Or put this line as part of your CD:
 
 ```bash
-aws cloudfront update-distribution --default-root-object "/index.<version>.html"
+aws cloudfront update-distribution --default-root-object "/index.$version.html"
 ```
 
 I assume you don't use index.html or anything similar in your url, do you?
 
-This is only if you don't want to use Cloudfront invalidations for any reason. eg: because AWS says it can incur extra costs.
+This is only if you don't want to use [Cloudfront invalidations](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) for any reason. eg: because AWS says it can incur extra costs.
 
 -------
 
@@ -30,11 +30,11 @@ Time has come when I had to play with CI and CD once I felt comfortable with the
 
 Let me tell how a request to an app using Cloudfront looks like:
 
-Browser -> Cloudfront -> Origin -> Cloudfront -> Browser
+    Browser -> Cloudfront -> Origin -> Cloudfront -> Browser
 
 or if you are "lucky" to hit a cached but potentially stale *object*:
 
-Browser -> Cloudfront -> Browser
+    Browser -> Cloudfront -> Browser
 
 Now, the problem of being lucky, is that might end with an outdated copy of the object when Cloudfront doesn't know the origin (eg: S3) was updated, and these are some of the ways to avoid that:
 
@@ -48,10 +48,10 @@ Let's say file versioning is your favourite too. It's a common practice to put a
     js/my.123456.js
     css/my.0303456.css
 
-Now let's say you have set the _Default Root Object_ in Cloudfront to be index.html, and already redirected your DNS to point www.your-domain.com to <whatever>.cloudfront.com (a CNAME record) so everytime you visit your page, it happens the following:
+Now let's say you have set the _Default Root Object_ in Cloudfront to be index.html, and already redirected your DNS to point www.your-domain.com to $whatever.cloudfront.com (a CNAME record) so everytime you visit your page, it happens the following:
 
 - Your browser asks the DNS resolver what is the IP of https://www.your-domain.com
-- DNS knows it needs to resolve <whatever>.cloudfront.com instead (because of the CNAME) and gives the browser the ip of the proxy/CDN/Cloudfront
+- DNS knows it needs to resolve *$whatever.cloudfront.com* instead (because of the CNAME) and gives the browser the ip of the proxy/CDN/Cloudfront
 - The browser requests /index.html to Cloudfront using the IP returned by the resolver
 - Cloudfront requests /index.html to the origin and caches it
 - Cloudfront sends /index.html back to your browser
@@ -70,11 +70,11 @@ As I said, AWS warns you to do it as it can incur costs, but I think it's still 
 
 An alternative is to version the index.html file and you can do it as follows:
 
-- Upload a new index.<version>.html to your origin
+- Upload a new index.$version.html to your origin
 - Tell cloudfront to use the new _Default Root Object_:
 
     ```bash
-    aws cloudfront update-distribution --default-root-object "/index.<version>.html"
+    aws cloudfront update-distribution --default-root-object "/index.$version.html"
     ```
 
 EOF
