@@ -38,7 +38,7 @@ or if you are "lucky" to hit a cached but potentially stale *object*:
 
 Now, the problem of being lucky, is that you might end with an outdated copy of the object when Cloudfront doesn't know the origin (eg: S3) was updated, and these are some of the ways to avoid that:
 
-- Using `Cache-Control` in the origin: You can specify for how long an object is valid in the CDN (Cloudfront) through `s-maxage=<number of seconds>`. Don't want to go deep here, so please google/duckduckgo s-maxage if it's something new to you
+- Using `Cache-Control` in the origin: You can specify for how long an object is valid in the CDN (Cloudfront) through `s-maxage=<number of seconds>`. Don't want to go deep here, so please google/duckduckgo `s-maxage` if needed
 - Specify the cache duration in Cloudfront
 - File versioning (my favourite)
 
@@ -50,7 +50,7 @@ Let's say you go with versioning too, so you need to put a hash in your asset fi
 
 Now let's say you have set the [_Default Root Object_](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html) in Cloudfront to be index.html, and already redirected your DNS to point www.your-domain.com to $whatever.cloudfront.com (a CNAME record) so everytime you visit your page, it happens the following:
 
-- Your browser asks the DNS resolver what is the IP of https://www.your-domain.com
+- Your browser asks the DNS resolver what is the IP of www.your-domain.com
 - DNS knows it needs to resolve *$whatever.cloudfront.com* instead (because of the CNAME) and gives the browser the IP of the proxy/CDN/Cloudfront
 - The browser requests _index.html_ to Cloudfront using the IP returned by the resolver
 - Cloudfront requests _index.html_ to the origin and caches it
