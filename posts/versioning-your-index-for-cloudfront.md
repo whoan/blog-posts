@@ -11,9 +11,9 @@ If you don't want to [invalidate](https://docs.aws.amazon.com/AmazonCloudFront/l
 - You can do it manually (boring!)
 - Or put this line as part of your CD:
 
-```bash
-aws cloudfront update-distribution --default-root-object "/index.$version.html"
-```
+    ```bash
+    aws cloudfront update-distribution --default-root-object "/index.$version.html"
+    ```
 
 I assume you don't use index.html or anything similar in your url, do you?
 
@@ -36,29 +36,29 @@ or if you are "lucky" to hit a cached but potentially stale *object*:
 
     Browser -> Cloudfront -> Browser
 
-Now, the problem of being lucky, is that might end with an outdated copy of the object when Cloudfront doesn't know the origin (eg: S3) was updated, and these are some of the ways to avoid that:
+Now, the problem of being lucky, is that you might end with an outdated copy of the object when Cloudfront doesn't know the origin (eg: S3) was updated, and these are some of the ways to avoid that:
 
-- Using Cache-Control in the origin: You can specify for how long an object is valid in the CDN (Cloudfront) through `s-maxage=<number of seconds>`. Don't want to go deep here, so please google/duckduckgo s-maxage if it's something new to you
+- Using `Cache-Control` in the origin: You can specify for how long an object is valid in the CDN (Cloudfront) through `s-maxage=<number of seconds>`. Don't want to go deep here, so please google/duckduckgo s-maxage if it's something new to you
 - Specify the cache duration in Cloudfront
-- File versioning -> my favourite
+- File versioning (my favourite)
 
-Let's say file versioning is your favourite too. It's a common practice to put a hash in your asset files, and indeed, if you are using (for example) webpack, chances are you already have those files with hashes in its names, so you might have something like this:
+Let's say you go with versioning too, so you need to put a hash in your asset files, and indeed, if you are using (for example) webpack, chances are you already have those files with hashes in its names. You may have something like this:
 
-    index.html
-    js/my.123456.js
-    css/my.0303456.css
+        index.html
+        js/my.123456.js
+        css/my.0303456.css
 
-Now let's say you have set the _Default Root Object_ in Cloudfront to be index.html, and already redirected your DNS to point www.your-domain.com to $whatever.cloudfront.com (a CNAME record) so everytime you visit your page, it happens the following:
+Now let's say you have set the [_Default Root Object_](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html) in Cloudfront to be index.html, and already redirected your DNS to point www.your-domain.com to $whatever.cloudfront.com (a CNAME record) so everytime you visit your page, it happens the following:
 
 - Your browser asks the DNS resolver what is the IP of https://www.your-domain.com
-- DNS knows it needs to resolve *$whatever.cloudfront.com* instead (because of the CNAME) and gives the browser the ip of the proxy/CDN/Cloudfront
-- The browser requests /index.html to Cloudfront using the IP returned by the resolver
-- Cloudfront requests /index.html to the origin and caches it
-- Cloudfront sends /index.html back to your browser
-- Your browser sees you have 2 links in the html header so makes two more requests to Cloudfront
+- DNS knows it needs to resolve *$whatever.cloudfront.com* instead (because of the CNAME) and gives the browser the IP of the proxy/CDN/Cloudfront
+- The browser requests _index.html_ to Cloudfront using the IP returned by the resolver
+- Cloudfront requests _index.html_ to the origin and caches it
+- Cloudfront sends _index.html_ back to your browser
+- Your browser sees there are 2 links in the html header so makes two more requests to Cloudfront
 - ...
 
-Now, what happens if you discover a bug 1 minute after the deployment, takes you 1 minute to fix it, and you deploy again in 1 minute to the origin? Chances are, you set a cache longer than 3 minutes for the index.html in Cloudfront, so you will get an old versión of such a file when you visit www.your-domain.com again.
+What happens if you discover a bug 1 minute after the deployment, takes you 1 minute to fix it, and you deploy again in 1 minute to the origin? Chances are, you set a cache longer than 3 minutes for the index.html in Cloudfront, so you will get an old versión of such a file when you visit www.your-domain.com again.
 
 The fastest solution? Invalidate the cache with Cloudfront:
 
@@ -73,8 +73,8 @@ An alternative is to version the index.html file and you can do it as follows:
 - Upload a new index.$version.html to your origin
 - Tell cloudfront to use the new _Default Root Object_:
 
-    ```bash
-    aws cloudfront update-distribution --default-root-object "/index.$version.html"
-    ```
+        ```bash
+        aws cloudfront update-distribution --default-root-object "/index.$version.html"
+        ```
 
 EOF
