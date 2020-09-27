@@ -73,8 +73,8 @@ An alternative is to version the index.html file and you can do it as follows:
 - Upload a new index.$version.html to your origin
 - Tell cloudfront to use the new _Default Root Object_:
 
-        ```bash
-        aws cloudfront update-distribution --default-root-object "/index.$version.html"
-        ```
+    ```bash
+    aws cloudfront update-distribution --default-root-object "/index.$version.html"
+    ```
 
 EOF
