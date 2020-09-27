@@ -21,6 +21,6 @@ RUN \
   mv .vuepress/dist dist
 
 # production stage
-FROM docker.pkg.github.com/whoan/docker-images/nginx-static:latest as production-stage
+FROM ghcr.io/whoan/nginx-static:latest as production-stage
 
 COPY --from=build-stage /app/dist /usr/share/nginx/html
