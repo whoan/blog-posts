@@ -1,5 +1,5 @@
 ---
-lastModified: '2020-09-26'
+lastModified: '2020-09-27'
 ---
 
 # Versioning your index for Cloudfront
@@ -17,7 +17,7 @@ If you don't want to [invalidate](https://docs.aws.amazon.com/AmazonCloudFront/l
 
 I assume you don't use index.html or anything similar in your url, do you?
 
-This is only if you don't want to use [Cloudfront invalidations](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) for any reason. eg: because AWS says it can incur extra costs.
+This is only if you don't want to use [Cloudfront invalidations](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) for whatever reason. eg: because AWS says it can incur extra costs. Yes, [you need to use a lot of invalidations to start paying](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#PayingForInvalidation).
 
 -------
 
